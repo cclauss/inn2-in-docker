@@ -14,6 +14,7 @@ jobs:
       - run: |
           sudo apt-get update -qq
           sudo apt-get install --yes inn2
+          ls -Fla
       - run: |
           python3 --version
           echo "Node.js $(node --version)"
