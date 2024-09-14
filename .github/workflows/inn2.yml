@@ -1,4 +1,4 @@
-name: build
+name: apt-get_install_inn2
 on:
   push:
     branches: [ main ]
@@ -7,7 +7,7 @@ on:
   workflow_dispatch:
 
 jobs:
-  build:
+  apt-get_install_inn2:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
