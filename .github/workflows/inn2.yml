@@ -11,7 +11,10 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - if: runner.os == 'Linux'
-        run: |
+      - run: |
           sudo apt-get update -qq
           sudo apt-get install --yes inn2
+      - run: |
+          python3 --version
+          echo "Node.js $(node --version)"
+          nnptd --version || innd --version || inn2 --version || true
