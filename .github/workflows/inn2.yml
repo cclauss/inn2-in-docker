@@ -14,13 +14,19 @@ jobs:
       - run: |
           hostname
           echo $HOSTNAME
-          sudo touch /etc/news/inn.conf || true
+          echo "domain: localhost.localdomain" > inn.conf
+          cat inn.conf
           sudo mkdir /etc/news
-          sudo touch /etc/news/inn.conf
           sudo ls -Fla /etc/news
-          sudo echo "domain: localhost.localdomain" > /etc/news/inn.conf
+          sudo mv inn.conf /etc/news/
           sudo ls -Fla /etc/news
-          sudo cat /etc/news/inn.conf
+          #sudo touch /etc/news/inn.conf || true
+          #sudo mkdir /etc/news
+          #sudo touch /etc/news/inn.conf
+          #sudo ls -Fla /etc/news
+          #sudo echo "domain: localhost.localdomain" > /etc/news/inn.conf
+          #sudo ls -Fla /etc/news
+          #sudo cat /etc/news/inn.conf
           sudo apt-get update -qq
           sudo apt-get install --yes inn2
           ls -Fla
