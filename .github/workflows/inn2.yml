@@ -1,4 +1,4 @@
-name: apt-get_install_inn2
+name: InterNetNews2
 on:
   push:
     branches: [ main ]
@@ -7,7 +7,7 @@ on:
   workflow_dispatch:
 
 jobs:
-  apt-get_install_inn2:
+  inn2:
     strategy:
       fail-fast: false
       matrix:
