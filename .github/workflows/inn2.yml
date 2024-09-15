@@ -29,11 +29,19 @@ jobs:
       - run: systemctl status inn2
       - shell: python
         run: |
-          import nntplib
-          nntp_server = nntplib.NNTP("localhost.localdomain")
-          print(nntp_server)
-          resp, count, first, last, name = nntp_server.group('gmane.comp.python.committers')
-          print('Group', name, 'has', count, 'articles, range', first, 'to', last)
-          resp, overviews = nntp_server.over((last - 9, last))
-          for id, over in overviews:
-              print(id, nntplib.decode_header(over['subject']))
+          from nntplib import NNTP
+          with NNTP("localhost.localdomain") as nntp_server:
+              print(f"{nntp_server = }")
+              print(f"{nntp_server.nntp_version = }")
+              print(f"{nntp_server.nntp_implementation = }")
+              print(f"{nntp_server.getwelcome() = }")
+              print(f"{nntp_server.getcapabilities() = }")
+              from datetime import date, timedelta
+              resp, groups = nntp_server.newgroups(date.today() - timedelta(days=3))
+              print(f"{resp = }, {len(groups) = }")
+              print(f"{resp[0] = }")
+              resp, count, first, last, name = nntp_server.group('gmane.comp.python.committers')
+              print('Group', name, 'has', count, 'articles, range', first, 'to', last)
+              resp, overviews = nntp_server.over((last - 9, last))
+              for id, over in overviews:
+                  print(id, nntplib.decode_header(over['subject']))
