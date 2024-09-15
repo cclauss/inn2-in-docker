@@ -14,7 +14,9 @@ jobs:
       - run: |
           hostname
           echo $HOSTNAME
+          sudo touch /etc/news/inn.conf || true
           sudo mkdir /etc/news
+          sudo touch /etc/news/inn.conf
           sudo echo "domain: localhost.localdomain" > /etc/news/inn.conf
           cat /etc/news/inn.conf
           sudo apt-get update -qq
