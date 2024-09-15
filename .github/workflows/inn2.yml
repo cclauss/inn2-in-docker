@@ -14,7 +14,7 @@ jobs:
       - run: |
           hostname
           echo $HOSTNAME
-          mkdir /etc/news
+          sudo mkdir /etc/news
           sudo echo "domain: localhost.localdomain" > /etc/news/inn.conf
           cat /etc/news/inn.conf
           sudo apt-get update -qq
