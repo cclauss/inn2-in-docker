@@ -36,6 +36,7 @@ jobs:
               print(f"{nntp_server.nntp_implementation = }")
               print(f"{nntp_server.getwelcome() = }")
               print(f"{nntp_server.getcapabilities() = }")
+              print(f"{nntp_server.list() = }")
               from datetime import date, timedelta
               resp, groups = nntp_server.newgroups(date.today() - timedelta(days=3))
               print(f"{resp = }, {len(groups) = }")
