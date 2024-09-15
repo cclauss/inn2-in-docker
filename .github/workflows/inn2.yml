@@ -15,6 +15,9 @@ jobs:
     runs-on: ${{ matrix.os }}
     steps:
       - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: 3.12  # nntplib was removed in Python 3.13
       - run: |
           echo "localhost.localdomain" > hostname
           sudo mv hostname /etc/
@@ -24,7 +27,13 @@ jobs:
           sudo apt-get install --yes inn2
       - run: cat /etc/news/inn.conf
       - run: systemctl status inn2
-      - run: |
-          python3 --version
-          echo "Node.js $(node --version)"
-          nnptd --version || innd --version || inn2 --version || true
+      - shell: python
+        run: |
+          import nntplib
+          nntp_server = nntplib.NNTP("localhost.localdomain")
+          print(nntp_server)
+          resp, count, first, last, name = nntp_server.group('gmane.comp.python.committers')
+          print('Group', name, 'has', count, 'articles, range', first, 'to', last)
+          resp, overviews = nntp_server.over((last - 9, last))
+          for id, over in overviews:
+              print(id, nntplib.decode_header(over['subject']))
