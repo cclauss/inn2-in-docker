@@ -12,21 +12,12 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - run: |
-          # cat << EOF > inn.conf
-          # domain: localhost.localdomain
-          # mta: mta
-          # pathnews: pathnews
-          # hismethod: hismethod
-          # ovmethod: ovmethod
-          # EOF
-          # sudo mkdir /etc/news
-          # sudo mv inn.conf /etc/news/
-          # cat /etc/news/inn.conf
           echo "localhost.localdomain" > hostname
           sudo mv hostname /etc/
+      - run: |
           sudo apt-get update -qq
           sudo apt-get install --yes inn2
-          cat /etc/news/inn.conf || true
+      - run: cat /etc/news/inn.conf
       - run: |
           python3 --version
           echo "Node.js $(node --version)"
