@@ -29,6 +29,7 @@ jobs:
       - run: systemctl status inn2
       - shell: python
         run: |
+          import time
           from email.message import EmailMessage
           from nntplib import NNTP
           with NNTP("localhost.localdomain") as nntp_server:
