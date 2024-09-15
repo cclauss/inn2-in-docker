@@ -12,10 +12,12 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - run: |
-          sudo apt-get update -qq
-          sudo apt-get install --yes inn2
           hostname
           echo $HOSTNAME
+          sudo echo "domain: localhost.localdomain" > /etc/news/inn.conf
+          cat /etc/news/inn.conf
+          sudo apt-get update -qq
+          sudo apt-get install --yes inn2
           ls -Fla
       - run: |
           python3 --version
