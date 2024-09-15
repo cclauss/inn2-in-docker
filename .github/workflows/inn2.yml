@@ -12,7 +12,13 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - run: |
-          echo "domain: localhost.localdomain" > inn.conf
+          cat << EOF > inn.conf
+            domain: localhost.localdomain
+            mta: mta
+            pathnews: pathnews
+            hismethod: hismethod
+            ovmethod: ovmethod
+          EOF
           sudo mkdir /etc/news
           sudo mv inn.conf /etc/news/
           cat /etc/news/inn.conf
