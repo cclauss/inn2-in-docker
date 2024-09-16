@@ -50,7 +50,13 @@ jobs:
               # msg['Newsgroups'] = 'local.test'
               # msg['Date'] = time.strftime('%a, %d %b %Y %H:%M:%S +0000', time.gmtime())
               # msg.set_content(b'This is a test message posted to the local.test group.')
-              msg = "This is a test message posted to the local.test group."
+              msg = """From: GitHub Action <gha\@linux.it>
+              Newsgroups: junk
+              Subject: inews test
+              Message-ID: $id
+
+              This is a test message posted to the junk group.
+              """
               print(f"{msg = }")
               # The commands below fail...
               response = nntp_server.post(msg)
