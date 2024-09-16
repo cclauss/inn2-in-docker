@@ -110,9 +110,9 @@ jobs:
               resp, count, first, last, name = nntp_server.group('junk')
               print(f"Group '{name}' has {count} articles, range {first} to {last}.")
               last = nntp_server.last()
-              print(f"{last = })
+              print(f"{last = }")
               article = nntp_server.article(last[2])
-              print(f"{article = })
+              print(f"{article = }")
 
   # nntplib_overviews:
   #  needs: inn2
