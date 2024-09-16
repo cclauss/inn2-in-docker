@@ -104,6 +104,8 @@ jobs:
               print(f"{msg = }")
               response = nntp_server.post(msg.encode("utf-8"))
               print(f"{response = }")
+              resp, count, first, last, name = nntp_server.group('junk')
+              print('Group', name, 'has', count, 'articles, range', first, 'to', last)
 
   # nntplib_overviews:
   #  needs: inn2
