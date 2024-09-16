@@ -109,9 +109,9 @@ jobs:
               # time.sleep(5)
               # resp, count, first, last, name = nntp_server.group('local.test')
               # print(f"Group '{name}' has {count} articles, range {first} to {last}.")
-              last = nntp_server.next()  # last() fails
-              print(f"{last = }")
-              article = nntp_server.article(last[2])
+              stat = nntp_server.stat()  # last() and next() both fail
+              print(f"{stat = }")
+              article = nntp_server.article(stat[2])
               print(f"{article = }")
 
   # nntplib_overviews:
