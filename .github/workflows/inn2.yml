@@ -67,7 +67,7 @@ jobs:
           # ssl_context=ssl.create_default_context()
           # with nntplib.NNTP_SSL("localhost.localdomain", ssl_context=ssl_context) as nntp_server:
           with nntplib.NNTP("localhost.localdomain", readermode=True) as nntp_server:
-              resp, count, first, last, name = nntp_server.group('junk')
+              resp, count, first, last, name = nntp_server.group('local.test')
               print(f"Group '{name}' has {count} articles, range {first} to {last}.")
 
   # nntplib_newsgroups:
@@ -127,7 +127,7 @@ jobs:
         run: |
           import nntplib  # Removed from the Standard Library in Python 3.13.
           with nntplib.NNTP("localhost.localdomain", readermode=True) as nntp_server:
-              resp, count, first, last, name = nntp_server.group('junk')
+              resp, count, first, last, name = nntp_server.group('local.test')
               print(resp, count, first, last, name)
               resp, overviews = nntp_server.over((last - 9, last))
               for id, over in overviews:
