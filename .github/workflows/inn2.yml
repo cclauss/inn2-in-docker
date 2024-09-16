@@ -31,7 +31,7 @@ jobs:
         run: |
           import time
           from email.message import EmailMessage
-          from nntplib import NNTP
+          from nntplib import NNTP_SSL
           # with NNTP("localhost.localdomain", readermode=True) as nntp_server:
           with NNTP_SSL("localhost.localdomain") as nntp_server:
               print(f"{nntp_server = }")
