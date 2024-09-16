@@ -87,23 +87,6 @@ jobs:
               print(f"{resp = }, {len(groups) = }")
               print(f"{resp[0] = }")
 
-  # nntplib_overviews:
-  #  needs: inn2
-  #  runs-on: ubuntu-24.04
-  #  steps:
-  #    - uses: actions/setup-python@v5
-  #      with:
-  #        python-version: 3.12  # nntplib was removed from the Standard Library in Python 3.13.
-      - name: nntplib_overviews
-        shell: python
-        run: |
-          import nntplib  # Removed from the Standard Library in Python 3.13.
-          with nntplib.NNTP("localhost.localdomain", readermode=True) as nntp_server:
-              resp, count, first, last, name = nntp_server.group('junk')
-              resp, overviews = nntp_server.over((last - 9, last))
-              for id, over in overviews:
-                  print(id, nntplib.decode_header(over['subject']))
-
   # nntplib_post:
   #  needs: inn2
   #  runs-on: ubuntu-24.04
@@ -121,3 +104,20 @@ jobs:
               print(f"{msg = }")
               response = nntp_server.post(msg)
               print(f"{response = }")
+
+  # nntplib_overviews:
+  #  needs: inn2
+  #  runs-on: ubuntu-24.04
+  #  steps:
+  #    - uses: actions/setup-python@v5
+  #      with:
+  #        python-version: 3.12  # nntplib was removed from the Standard Library in Python 3.13.
+      - name: nntplib_overviews
+        shell: python
+        run: |
+          import nntplib  # Removed from the Standard Library in Python 3.13.
+          with nntplib.NNTP("localhost.localdomain", readermode=True) as nntp_server:
+              resp, count, first, last, name = nntp_server.group('junk')
+              resp, overviews = nntp_server.over((last - 9, last))
+              for id, over in overviews:
+                  print(id, nntplib.decode_header(over['subject']))
