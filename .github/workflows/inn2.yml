@@ -37,6 +37,7 @@ jobs:
           # with nntplib.NNTP("localhost.localdomain", readermode=True) as nntp_server:  # Hangs.
           with nntplib.NNTP("localhost.localdomain") as nntp_server:
               print(f"{nntp_server = }")
+              print(f"{nntp_server.starttls() = }")
               print(f"{nntp_server.nntp_version = }")
               print(f"{nntp_server.nntp_implementation = }")
               print(f"{nntp_server.getwelcome() = }")
