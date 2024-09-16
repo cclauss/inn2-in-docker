@@ -32,8 +32,10 @@ jobs:
           import time
           from email.message import EmailMessage
           from nntplib import NNTP
-          with NNTP("localhost.localdomain", readermode=True) as nntp_server:
+          # with NNTP("localhost.localdomain", readermode=True) as nntp_server:
+          with NNTP("localhost.localdomain") as nntp_server:
               print(f"{nntp_server = }")
+              print(f"{nntp_server.group('local.test') = }")
               print(f"{nntp_server.nntp_version = }")
               print(f"{nntp_server.nntp_implementation = }")
               print(f"{nntp_server.getwelcome() = }")
