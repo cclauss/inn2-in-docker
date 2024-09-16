@@ -29,11 +29,13 @@ jobs:
       - run: systemctl status inn2
       - shell: python
         run: |
+          import nntplib  # Removed from the Standard Library in Python 3.13.
           import time
           from email.message import EmailMessage
           from nntplib import NNTP_SSL
-          # with NNTP("localhost.localdomain", readermode=True) as nntp_server:
-          with NNTP_SSL("localhost.localdomain") as nntp_server:
+          # with nntplib.NNTP_SSL("localhost.localdomain") as nntp_server:  # Connection refused.
+          # with nntplib.NNTP("localhost.localdomain", readermode=True) as nntp_server:  # Hangs.
+          with nntplib.NNTP("localhost.localdomain") as nntp_server:
               print(f"{nntp_server = }")
               print(f"{nntp_server.nntp_version = }")
               print(f"{nntp_server.nntp_implementation = }")
