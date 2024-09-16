@@ -113,6 +113,7 @@ jobs:
               print(f"{stat = }")
               article = nntp_server.article(stat[2])
               print(f"{article = }")
+              print("\n".join(line.decode("utf-8") for line in article[2].lines))
 
   # nntplib_overviews:
   #  needs: inn2
