@@ -37,19 +37,20 @@ jobs:
           # with nntplib.NNTP("localhost.localdomain", readermode=True) as nntp_server:  # Hangs.
           with nntplib.NNTP("localhost.localdomain") as nntp_server:
               print(f"{nntp_server = }")
-              print(f"{nntp_server.starttls() = }")
+              # print(f"{nntp_server.starttls() = }")  # nntplib.NNTPTemporaryError: 401 MODE-READER
               print(f"{nntp_server.nntp_version = }")
               print(f"{nntp_server.nntp_implementation = }")
               print(f"{nntp_server.getwelcome() = }")
               print(f"{nntp_server.getcapabilities() = }")
               print(f"{nntp_server.list() = }")
               print("\n".join(group_info.group for group_info in nntp_server.list()[1]))
-              msg = EmailMessage()
-              msg['From'] = 'sender@example.com'
-              msg['Subject'] = 'Test post to local.test'
-              msg['Newsgroups'] = 'local.test'
-              msg['Date'] = time.strftime('%a, %d %b %Y %H:%M:%S +0000', time.gmtime())
-              msg.set_content(b'This is a test message posted to the local.test group.')
+              # msg = EmailMessage()
+              # msg['From'] = 'sender@example.com'
+              # msg['Subject'] = 'Test post to local.test'
+              # msg['Newsgroups'] = 'local.test'
+              # msg['Date'] = time.strftime('%a, %d %b %Y %H:%M:%S +0000', time.gmtime())
+              # msg.set_content(b'This is a test message posted to the local.test group.')
+              msg = "This is a test message posted to the local.test group."
               print(f"{msg = }")
               # The commands below fail...
               response = nntp_server.post(msg)
