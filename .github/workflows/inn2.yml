@@ -109,7 +109,7 @@ jobs:
               # time.sleep(5)
               # resp, count, first, last, name = nntp_server.group('local.test')
               # print(f"Group '{name}' has {count} articles, range {first} to {last}.")
-              last = nntp_server.last()
+              last = nntp_server.prev()
               print(f"{last = }")
               article = nntp_server.article(last[2])
               print(f"{article = }")
