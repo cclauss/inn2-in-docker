@@ -30,7 +30,7 @@ jobs:
         run: |
           import nntplib  # Removed from the Standard Library in Python 3.13.
           import pathlib
-          with nntplib.NNTP("localhost") as nntp_server:
+          with nntplib.NNTP("localhost", readermode=True) as nntp_server:
               print(f"{nntp_server = }")
               # print(f"{nntp_server.starttls() = }")  # nntplib.NNTPTemporaryError: 401 MODE-READER
               print(f"{nntp_server.nntp_version = }")
