@@ -129,6 +129,6 @@ jobs:
           with nntplib.NNTP("localhost.localdomain", readermode=True) as nntp_server:
               resp, count, first, last, name = nntp_server.group('local.test')
               print(resp, count, first, last, name)
-              resp, overviews = nntp_server.over((last - 9, last))
+              resp, overviews = nntp_server.over((first, last))
               for id, over in overviews:
                   print(id, nntplib.decode_header(over['subject']))
