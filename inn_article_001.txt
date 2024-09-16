@@ -1,0 +1,6 @@
+From: Christian Clauss <cclauss@me.com>
+Newsgroups: junk
+Subject: inews test
+Message-ID: <test.inews.1@inn2.packages.debian.org>
+
+This is a test message posted to the junk group.
