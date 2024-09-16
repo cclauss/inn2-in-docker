@@ -68,7 +68,7 @@ jobs:
           # with nntplib.NNTP_SSL("localhost.localdomain", ssl_context=ssl_context) as nntp_server:
           with nntplib.NNTP("localhost.localdomain", readermode=True) as nntp_server:
               resp, count, first, last, name = nntp_server.group('junk')
-              print('Group', name, 'has', count, 'articles, range', first, 'to', last)
+              print(f"Group '{name}' has {count} articles, range {first} to {last}.")
 
   # nntplib_newsgroups:
   #  needs: inn2
@@ -85,7 +85,6 @@ jobs:
           with nntplib.NNTP("localhost.localdomain", readermode=True) as nntp_server:
               resp, groups = nntp_server.newgroups(date.today() - timedelta(days=3))
               print(f"{resp = }, {len(groups) = }")
-              print(f"{resp[0] = }")
 
   # nntplib_post:
   #  needs: inn2
@@ -105,7 +104,10 @@ jobs:
               response = nntp_server.post(msg.encode("utf-8"))
               print(f"{response = }")
               resp, count, first, last, name = nntp_server.group('junk')
-              print('Group', name, 'has', count, 'articles, range', first, 'to', last)
+              print(f"Group '{name}' has {count} articles, range {first} to {last}.")
+              sleep 5
+              resp, count, first, last, name = nntp_server.group('junk')
+              print(f"Group '{name}' has {count} articles, range {first} to {last}.")
 
   # nntplib_overviews:
   #  needs: inn2
@@ -120,6 +122,7 @@ jobs:
           import nntplib  # Removed from the Standard Library in Python 3.13.
           with nntplib.NNTP("localhost.localdomain", readermode=True) as nntp_server:
               resp, count, first, last, name = nntp_server.group('junk')
+              print(resp, count, first, last, name)
               resp, overviews = nntp_server.over((last - 9, last))
               for id, over in overviews:
                   print(id, nntplib.decode_header(over['subject']))
