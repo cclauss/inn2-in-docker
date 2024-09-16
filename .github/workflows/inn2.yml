@@ -51,13 +51,14 @@ jobs:
               # msg['Newsgroups'] = 'local.test'
               # msg['Date'] = time.strftime('%a, %d %b %Y %H:%M:%S +0000', time.gmtime())
               # msg.set_content(b'This is a test message posted to the local.test group.')
-              msg = textwrap.dedent("""From: GitHub Action <gha\@linux.it>
+              msg = textwrap.dedent("""
+              From: GitHub Action <gha\@linux.it>
               Newsgroups: junk
               Subject: inews test
-              Message-ID: $id
+              Message-ID: <test.inews.1\@inn2.packages.debian.org>
 
               This is a test message posted to the junk group.
-              """)
+              """).lstrip()
               print(f"{msg = }")
               # The commands below fail...
               response = nntp_server.post(msg)
