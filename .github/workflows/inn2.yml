@@ -35,7 +35,7 @@ jobs:
           import time
           # from email.message import EmailMessage
           # from nntplib import NNTP_SSL
-          with nntplib.NNTP_SSL("localhost.localdomain", context=ssl.create_default_context()) as nntp_server:  # Connection refused.
+          with nntplib.NNTP_SSL("localhost.localdomain", ssl_context=ssl.create_default_context()) as nntp_server:  # Connection refused.
           # with nntplib.NNTP("localhost.localdomain", readermode=True) as nntp_server:  # Hangs.
           # with nntplib.NNTP("localhost.localdomain") as nntp_server:
               print(f"{nntp_server = }")
