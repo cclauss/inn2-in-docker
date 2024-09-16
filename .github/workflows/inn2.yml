@@ -106,7 +106,7 @@ jobs:
               print(f"{response = }")
               resp, count, first, last, name = nntp_server.group('junk')
               print(f"Group '{name}' has {count} articles, range {first} to {last}.")
-              time.sleep(secs=5)
+              time.sleep(5)
               resp, count, first, last, name = nntp_server.group('junk')
               print(f"Group '{name}' has {count} articles, range {first} to {last}.")
 
