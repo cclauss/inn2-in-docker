@@ -66,7 +66,7 @@ jobs:
           # import ssl
           # ssl_context=ssl.create_default_context()
           # with nntplib.NNTP_SSL("localhost.localdomain", ssl_context=ssl_context) as nntp_server:
-          with nntplib.NNTP("localhost.localdomain", readermode=True) as nntp_server:
+          with nntplib.NNTP("localhost", readermode=True) as nntp_server:
               resp, count, first, last, name = nntp_server.group('local.test')
               print(f"Group '{name}' has {count} articles, range {first} to {last}.")
 
@@ -82,7 +82,7 @@ jobs:
         run: |
           import nntplib  # Removed from the Standard Library in Python 3.13.
           from datetime import date, timedelta
-          with nntplib.NNTP("localhost.localdomain", readermode=True) as nntp_server:
+          with nntplib.NNTP("localhost", readermode=True) as nntp_server:
               resp, groups = nntp_server.newgroups(date.today() - timedelta(days=3))
               print(f"{resp = }, {len(groups) = }")
 
@@ -99,7 +99,7 @@ jobs:
           import nntplib  # Removed from the Standard Library in Python 3.13.
           import pathlib
           import time
-          with nntplib.NNTP("localhost.localdomain", readermode=True) as nntp_server:
+          with nntplib.NNTP("localhost", readermode=True) as nntp_server:
               msg = pathlib.Path("inn_article_001.txt").read_text()
               print(f"{msg = }")
               response = nntp_server.post(msg.encode("utf-8"))
@@ -126,7 +126,7 @@ jobs:
         shell: python
         run: |
           import nntplib  # Removed from the Standard Library in Python 3.13.
-          with nntplib.NNTP("localhost.localdomain", readermode=True) as nntp_server:
+          with nntplib.NNTP("localhost", readermode=True) as nntp_server:
               resp, count, first, last, name = nntp_server.group('local.test')
               print(resp, count, first, last, name)
               resp, overviews = nntp_server.over((first, last))
