@@ -26,21 +26,21 @@ jobs:
       #    innconfval pathdb 
       - run: systemctl status inn2
 
-  nntplib_status:  # Passes
-    needs: inn2
-    runs-on: ubuntu-24.04
-    steps:
+  # nntplib_status:  # Passes
+  #  needs: inn2
+  #  runs-on: ubuntu-24.04
+  #  steps:
       - uses: actions/setup-python@v5
         with:
           python-version: 3.12  # nntplib was removed from the Standard Library in Python 3.13.
       - shell: python
         run: |
           import nntplib  # Removed from the Standard Library in Python 3.13.
-          import ssl
+          # import ssl
           # ssl_context=ssl.create_default_context()
           # with nntplib.NNTP_SSL("localhost.localdomain", ssl_context=ssl_context) as nntp_server:  # Connection refused.
           # with nntplib.NNTP("localhost.localdomain", readermode=True) as nntp_server:  # Hangs.
-          with nntplib.NNTP("localhost", readermode=True) as nntp_server:
+          with nntplib.NNTP("localhost") as nntp_server:
               print(f"{nntp_server = }")
               # print(f"{nntp_server.starttls() = }")  # nntplib.NNTPTemporaryError: 401 MODE-READER
               print(f"{nntp_server.nntp_version = }")
@@ -51,13 +51,13 @@ jobs:
               print("News group list:")
               print("\n".join(group_info.group for group_info in nntp_server.list()[1]))
 
-  nntplib_group:
-    needs: inn2
-    runs-on: ubuntu-24.04
-    steps:
-      - uses: actions/setup-python@v5
-        with:
-          python-version: 3.12  # nntplib was removed from the Standard Library in Python 3.13.
+  # nntplib_group:
+  #  needs: inn2
+  #  runs-on: ubuntu-24.04
+  #  steps:
+  #    - uses: actions/setup-python@v5
+  #      with:
+  #        python-version: 3.12  # nntplib was removed from the Standard Library in Python 3.13.
       - shell: python
         run: |
           import nntplib  # Removed from the Standard Library in Python 3.13.
@@ -68,14 +68,15 @@ jobs:
               resp, count, first, last, name = nntp_server.group('junk')
               print('Group', name, 'has', count, 'articles, range', first, 'to', last)
 
-  nntplib_newsgroups:
-    needs: nntplib_status
-    runs-on: ubuntu-24.04
-    steps:
-      - uses: actions/setup-python@v5
-        with:
-          python-version: 3.12  # nntplib was removed from the Standard Library in Python 3.13.
-      - shell: python
+  # nntplib_newsgroups:
+  #  needs: inn2
+  #  runs-on: ubuntu-24.04
+  #  steps:
+  #    - uses: actions/setup-python@v5
+  #      with:
+  #        python-version: 3.12  # nntplib was removed from the Standard Library in Python 3.13.
+      - if: always()
+        shell: python
         run: |
           import nntplib  # Removed from the Standard Library in Python 3.13.
           from datetime import date, timedelta
@@ -84,14 +85,15 @@ jobs:
               print(f"{resp = }, {len(groups) = }")
               print(f"{resp[0] = }")
 
-  nntplib_overviews:
-    needs: nntplib_status
-    runs-on: ubuntu-24.04
-    steps:
-      - uses: actions/setup-python@v5
-        with:
-          python-version: 3.12  # nntplib was removed from the Standard Library in Python 3.13.
-      - shell: python
+  # nntplib_overviews:
+  #  needs: inn2
+  #  runs-on: ubuntu-24.04
+  #  steps:
+  #    - uses: actions/setup-python@v5
+  #      with:
+  #        python-version: 3.12  # nntplib was removed from the Standard Library in Python 3.13.
+      - if: always()
+        shell: python
         run: |
           import nntplib  # Removed from the Standard Library in Python 3.13.
           with nntplib.NNTP("localhost.localdomain") as nntp_server:
@@ -99,14 +101,15 @@ jobs:
               for id, over in overviews:
                   print(id, nntplib.decode_header(over['subject']))
 
-  nntplib_post:
-    needs: nntplib_status
-    runs-on: ubuntu-24.04
-    steps:
-      - uses: actions/setup-python@v5
-        with:
-          python-version: 3.12  # nntplib was removed from the Standard Library in Python 3.13.
-      - shell: python
+  # nntplib_post:
+  #  needs: inn2
+  #  runs-on: ubuntu-24.04
+  #  steps:
+  #    - uses: actions/setup-python@v5
+  #      with:
+  #        python-version: 3.12  # nntplib was removed from the Standard Library in Python 3.13.
+      - if: always()
+        shell: python
         run: |
           import nntplib  # Removed from the Standard Library in Python 3.13.
           import pathlib
