@@ -42,6 +42,7 @@ jobs:
               print("\n".join(
                   f"{i}. {group_info.group}" for i, group_info in enumerate(nntp_server.list()[1], 1)
               ))
+              print(0)
               # Post an article to the 'local.test' group.
               msg = pathlib.Path("inn_article_001.txt").read_text()
               # print(f"{msg = }")
