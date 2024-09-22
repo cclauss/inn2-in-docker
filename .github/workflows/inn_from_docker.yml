@@ -6,10 +6,18 @@ on:
     branches: [ main ]
   workflow_dispatch:
 jobs:
+  inn-job:
+    runs-on: ubuntu-latest
+    services:
+      inn-service:
+        # Docker Hub image
+        image: greenbender/inn
+        ports:
+          - 119:119
   inn_from_docker:  # Almost always passes
     runs-on: ubuntu-24.04
     steps:
-      - uses: greenbender/inn@v0.9.0
+      # - uses: greenbender/inn@v0.9.0
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
         with:
